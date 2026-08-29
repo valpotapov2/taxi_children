@@ -65,7 +65,7 @@ test('короткий перерыв не попадает в список, н�
   await expect(page.locator('.breaks_totals dd').nth(2)).not.toHaveText('0 сек')
 })
 
-test('заказ завершён во время перерыва: перерыв закрыт, показан итог', async ({ nannyPage: page }) => {
+test('заказ завершён во время перерыва: перерыв закрыт, показан итог', async ({ nannyPage: page }) =>
   await page.goto(`/driver-order/${DEMO_ORDER_ID}`)
 
   await page.locator(startBreak).click()
@@ -83,14 +83,14 @@ test('заказ завершён во время перерыва: переры
   await expect(page.locator('.breaks_item')).toHaveCount(1)
 })
 
-test('второй перерыв нельзя начать, пока первый активен', async ({ nannyPage: page }) => {
+test('второй перерыв нельзя начать, пока первый активен', async ({ nannyPage: page }) =>
   await page.goto(`/driver-order/${DEMO_ORDER_ID}`)
 
   await page.locator(startBreak).click()
   await page.locator(confirm).first().click()
   await expect(page.locator('.breaks_state-label')).toHaveText('Перерыв')
 
-  // Во время активного перерыва кнопка начала нового перерыва отсутствует.
+  // Во время активного перерыва кнопка начала нового перерыва не отображается.
   await expect(page.locator(startBreak)).toHaveCount(0)
   await expect(page.locator('.breaks_state-label')).toHaveText('Перерыв')
 })
